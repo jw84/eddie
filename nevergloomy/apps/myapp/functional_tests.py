@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import unittest
 
 class NewVisitorTest(unittest.TestCase):
@@ -16,14 +17,34 @@ class NewVisitorTest(unittest.TestCase):
 
         # She notices the page title and header mention screensaver
         self.assertIn('screensaver', self.browser.title)
-        self.fail('Finish the test!')
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('never gloomy', header_text)
 
         # She is invited to enter a schedule item straight away
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        self.assertEqual(
+            inputbox.get_attribute('placeholder'),
+            'Enter a time'
+        )
 
-# She types "8:00" into a text box (Pat needs to get up every morning at 9am)
+        # She types "8:00" into a text box (Pat needs to get up every morning at 9am)
+        inputbox.send_keys('8:00')
 
-# When she hits enter, the page updates, and now the page lists:
-# "Day and Month" as an item on the screensaver
+        # When she hits enter, the page updates, and now the page lists:
+        # "Day and Month" as an item on the screensaver
+        inputbox.send_keys(Keys.ENTER)
+
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertTrue(
+            any(row.text == '8:00' for row in rows)
+        )
+
+        # There is still a text box inviting her to add another item.
+        # She types "11:00" into a text box (Pat needs to check SpoonRocket at that time)
+        self.fail('Finish the test!')
+
+
 
 # There is still a text box inviting her to add another item.
 # She types "11:00" into a text box (Pat needs to check SpoonRocket at that time)

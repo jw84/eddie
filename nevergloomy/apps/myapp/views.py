@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 def index(request):
-	return HttpResponse('<html><title>screensaver</title></html>')
+    return render(request, 'myapp/home.html')

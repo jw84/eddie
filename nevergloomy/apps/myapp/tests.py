@@ -8,6 +8,7 @@ Replace this with more appropriate tests for your application.
 from django.core.urlresolvers import resolve
 from django.test import TestCase
 from django.http import HttpRequest
+from django.template.loader import render_to_string
 
 from apps.myapp.views import index
 
@@ -19,10 +20,8 @@ class HomePageTest(TestCase):
     def test_home_page_returns_correct_html(self):
         request = HttpRequest()
         response = index(request)
-        self.assertTrue(response.content.startswith(b'<html>'))
-        self.assertIn(b'<title>screensaver</title>', response.content)
-        self.assertTrue(response.content.endswith(b'</html>'))
-
+        expected_html = render_to_string('myapp/home.html')
+        self.assertEqual(response.content.decode(), expected_html)
 
 class SimpleTest(TestCase):
     def test_basic_addition(self):

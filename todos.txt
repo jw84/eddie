@@ -1,10 +1,11 @@
 EDDIE
 
-1. setup heroku accounts √
-2. setup cloudflare dns √
-3. setup django √
-4. setup api
-5. setup angularjs
-6. show video
-7. show clock
-8. schedule
+- setup heroku accounts √
+- setup cloudflare dns √
+- setup django √
+- setup tdd
+- setup api
+- setup angularjs
+- show video
+- show clock
+- schedule
