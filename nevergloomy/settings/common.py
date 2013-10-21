@@ -199,6 +199,9 @@ THIRD_PARTY_APPS = (
 
     # Asynchronous task queue:
     'djcelery',
+
+    # REST Framework:
+    'rest_framework'
 )
 
 LOCAL_APPS = (
