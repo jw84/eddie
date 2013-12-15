@@ -1,11 +1,11 @@
 EDDIE
 
-- setup heroku accounts √
-- setup cloudflare dns √
-- setup django √
-- setup tdd
-- setup api
-- setup angularjs
+- setup heroku accounts !!
+- setup cloudflare dns !!
+- setup django 1.5 !!
+- test driven development
+- django rest framework
+- angularjs
 - show video
 - show clock
 - schedule
