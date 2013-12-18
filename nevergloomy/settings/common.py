@@ -277,3 +277,10 @@ COMPRESS_JS_FILTERS = [
     'compressor.filters.template.TemplateFilter',
 ]
 ########## END COMPRESSION CONFIGURATION
+
+########## REST FRAMEWORK CONFIGURATION
+REST_FRAMEWORK = {
+	'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+	'PAGINATE_BY': 10
+}
+########## END FRAMEWORK CONFIGURATION
