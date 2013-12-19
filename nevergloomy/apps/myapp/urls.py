@@ -1,13 +1,15 @@
-from django.conf.urls import patterns, url
-from rest_framework.urlpatterns import format_suffix_patterns
-from apps.myapp.views import *
+from django.conf.urls import patterns, url, include
+from apps.myapp import views
+from rest_framework.routers import DefaultRouter
 
-# API endpoints
-urlpatterns = format_suffix_patterns(patterns('',
-	url(r'^$', 'api_root'),
-	url(r'^snippets/$', SnippetList.as_view(), name='snippet-list'),
-	url(r'^snippets/(?P<pk>[0-9]+)/$', SnippetDetail.as_view(), name='snippet-detail'),
-	url(r'^snippets/(?P<pk>[0-9]+)/highlight/$', SnippetHighlight.as_view(), name='snippet-highlight'),
-	url(r'^users/$', UserList.as_view(), name='users-list'),
-	url(r'^users/(?P<pk>[0-9]+)/$', UserDetail.as_view(), name='user-detail'),
-))
+# Create a router and register our viewsets with it.
+router = DefaultRouter()
+router.register(r'snippets', views.SnippetViewSet)
+router.register(r'users', views.UserViewSet)
+
+# The API URLs are now determined automatically by the router.
+# Additionally, we include the login urls for the browseable API
+
+urlpatterns = patterns('',
+	url(r'^', include(router.urls)),
+)
