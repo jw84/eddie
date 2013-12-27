@@ -1,0 +1,21 @@
+Eddie api 
+
+
+/api/v1/event/
+
+Return next scheduled event
+Return delta of event time
+
+/api/v1/events/
+
+Return next three days worth of events
+
+/api/v1/event/new
+
+Create new event object
+
+
+/api/v1/event/datestamp/
+
+Details of event
+

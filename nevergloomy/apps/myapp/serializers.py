@@ -1,37 +1,36 @@
 from django.forms import widgets
 from rest_framework import serializers
-from apps.myapp.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
+from apps.myapp.models import Event
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-	snippets = serializers.HyperlinkedRelatedField(many=True, view_name='snippet-detail')
+	events = serializers.HyperlinkedRelatedField(many=True, view_name='event-detail')
 	#snippets = serializers.PrimaryKeyRelatedField(many=True)
 
 	class Meta:
 		model = User
-		fields = ('url', 'username', 'snippets')
+		fields = ('url', 'username', 'events')
 
-class SnippetSerializer(serializers.HyperlinkedModelSerializer):
+class EventSerializer(serializers.HyperlinkedModelSerializer):
 	owner = serializers.Field(source='owner.username')
-	highlight = serializers.HyperlinkedIdentityField(view_name='snippet-highlight', format='html')
 
 	class Meta:
-		model = Snippet
-		fields = ('url', 'title', 'code', 'linenos', 'language', 'style', 'owner', 'highlight')
+		model = Event
+		fields = ('url', 'link', 'title', 'showtime', 'description', 'created', 'owner')
 
 	def restore_object(self, attrs, instance=None):
 		"""
-		Create or update a new snippet instance, given a dictionary of deserialized field values.
+		Create or update a new event instance, given a dictionary of deserialized field values.
 		Note that if we don't define this method, then deserializing data will simply return a dictionary of items.
 		"""
 		if instance:
 			# Update existing instance
-			instance.title = attrs.get('title', instance.title)
-			instance.code = attrs.get('code', instance.code)
-			instance.linenos = attrs.get('linenos', instance.linenos)
-			instance.language = attrs.get('language', instance.language)
-			instance.style = attrs.get('style', instance.style)
+			instance.link = attrs.get('title', instance.link)
+			instance.showtime = attrs.get('time', instance.showtime)
+			instance.description = attrs.get('desc', instance.description)
+			instance.created = attrs.get('created', instance.created)
+			instance.owner = attrs.get('owner', instance.owner)
 			return instance
 
 		# Create new instance
-		return Snippet(**attrs)
+		return Event(**attrs)
