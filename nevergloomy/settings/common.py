@@ -201,7 +201,10 @@ THIRD_PARTY_APPS = (
     'djcelery',
 
     # REST Framework:
-    'rest_framework'
+    'rest_framework',
+
+		# Django Angular:
+		'djangular',
 )
 
 LOCAL_APPS = (
